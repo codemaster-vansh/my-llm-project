@@ -1,0 +1,27 @@
+You are updating an existing web application. Here is the context:
+
+ORIGINAL PURPOSE:
+{original_brief}
+
+CURRENT CODE (first 6000 chars):
+{code_preview}
+
+REVISION REQUEST:
+{revision_brief}
+
+YOUR TASK:
+Modify the HTML application to implement the requested changes while:
+1. Preserving all existing functionality that isn't affected by the revision
+2. Maintaining the same code style, structure, and formatting
+3. Keeping all existing comments and adding new ones for changed sections
+4. Ensuring backward compatibility where possible
+5. Testing that the app still works correctly after changes
+
+IMPORTANT OUTPUT INSTRUCTIONS:
+- Return ONLY the complete, updated HTML file
+- Start with <!DOCTYPE html>
+- Do NOT include markdown code fences
+- Do NOT include explanations outside the code
+- Include the full file, not just the changed parts
+
+Generate the complete updated HTML now:
