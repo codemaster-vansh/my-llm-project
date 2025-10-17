@@ -8,7 +8,7 @@ Exports:
     NotificationService - HTTP notification service
 """
 
-from .llm_service import LLMService
+from .llm_service_aipipe import LLMService
 from .github_service import GitHubService
 from .notification_service import NotificationService, SyncNotificationService
 
@@ -17,4 +17,5 @@ __all__ = [
     'GitHubService',
     'NotificationService',
     'SyncNotificationService'
+
 ]
