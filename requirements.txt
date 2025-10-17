@@ -1,0 +1,24 @@
+# requirements.txt
+# LLM Deployment System Dependencies
+
+# Web Framework
+fastapi==0.115.0
+uvicorn[standard]==0.32.0
+
+# Data Validation
+pydantic==2.9.2
+pydantic-settings==2.6.0
+
+# HTTP Clients
+httpx==0.27.2
+requests==2.32.3
+urllib3==2.2.3
+
+# GitHub Integration
+PyGithub==2.4.0
+
+# Environment Variables
+python-dotenv==1.0.1
+
+# Optional: Better logging (recommended)
+colorlog==6.8.2
