@@ -186,7 +186,7 @@ async def process_deployment(request: Deployment):
         async with NotificationService() as notif_service:
             success = await notif_service._notify_evaluation(
                 request.evaluation_url,
-                evaluation_data.model_dump(),
+                evaluation_data.model_dump(mode='json'),
                 max_retries=5
             )
         
@@ -354,4 +354,5 @@ if __name__ == "__main__":
         host="0.0.0.0",
         port=port,
         log_level="info"
+
     )
