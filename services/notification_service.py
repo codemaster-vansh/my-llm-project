@@ -10,7 +10,7 @@ This service handles:
 
 import asyncio
 import logging
-from typing import Dict, Optional
+from typing import Dict, Optional, Any
 import httpx
 
 # Configure logging
@@ -48,6 +48,19 @@ class NotificationService:
         """Async context manager exit."""
         if self.client:
             await self.client.aclose()
+
+    
+    def convert_to_json_serializable(self, obj: Any) -> Any:
+        """Recursively convert non-serializable objects (like HttpUrl) to strings."""
+        if isinstance(obj, dict):
+            return {k: self.convert_to_json_serializable(v) for k, v in obj.items()}
+        elif isinstance(obj, list):
+            return [self.convert_to_json_serializable(v) for v in obj]
+        # Add this check for Pydantic HttpUrl
+        elif hasattr(obj, "__class__") and obj.__class__.__name__ == "HttpUrl":
+            return str(obj)
+        else:
+            return obj
     
     async def _notify_evaluation(self, url : str, data : Dict, max_retries : int = 5) -> bool:
         """
@@ -71,15 +84,9 @@ class NotificationService:
 
         for attempt in range(max_retries):
             try:
-
-                if isinstance(data, dict):
-                    for k, v in data.items():
-                        if hasattr(v, '__class__') and v.__class__.__name__ == "HttpUrl":
-                            data[k] = str(v)
-
                 response = await self.client.post(
                     str(url), 
-                    json=data,
+                    json=self.convert_to_json_serializable(data),
                     headers = {
                         "Content-Type": "application/json",
                         "User-Agent": "LLM-Deployment-System/1.0"
